@@ -1,0 +1,164 @@
+{
+  "main": {
+    "id": "be55254d056a0dbd",
+    "type": "split",
+    "children": [
+      {
+        "id": "af8652ea76591df3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4db0c12c2dc90041",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          },
+          {
+            "id": "f6cd45357ad0db74",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "гайд дем04.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8e9ff1a2aa52961f",
+    "type": "split",
+    "children": [
+      {
+        "id": "7d1a483ca205f411",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "244873ac5bae0802",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "20e4ae9fabec7fb8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "d532c2a048f6cd38",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "98f1ad45555bd618",
+    "type": "split",
+    "children": [
+      {
+        "id": "a2ee0eafae42d705",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3ea112a7f1df3c70",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "гайд дем04.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "cc4411531851fd30",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "гайд дем04.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "e8533c2864e00e97",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "5ead0d4ebe330dab",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "гайд дем04.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false
+    }
+  },
+  "active": "f6cd45357ad0db74",
+  "lastOpenFiles": [
+    "README.md",
+    "4slmlmq2.lkb~",
+    "гайд дем04.md"
+  ]
+}
