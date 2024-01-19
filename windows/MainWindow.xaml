@@ -6,12 +6,8 @@
         xmlns:local="clr-namespace:dem04"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="White">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            
-        </Grid.RowDefinitions>
-    </Grid>
+    <ScrollViewer>
+        <Grid x:Name="MainGrid">
+        </Grid>
+    </ScrollViewer>
 </Window>
