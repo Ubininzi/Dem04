@@ -8,10 +8,12 @@ namespace dem04
 {
 	public partial class MainWindow : Window
 	{
-		public MainWindow()
+		public Worker worker;
+		public MainWindow(Worker worker)
 		{
 			InitializeComponent();
 			MainGrid = FillMainGrid();
+			this.worker = worker;
 		}
 		public Grid FillMainGrid() { 
 			Grid grid = new Grid();
@@ -36,13 +38,4 @@ namespace dem04
 			return grid;
 		}
 	}
-    public partial class MainWindow : Window
-    {
-        public Worker worker;
-        public MainWindow(Worker worker)
-        {
-            InitializeComponent();
-            this.worker = worker;
-        }
-    }
 }
