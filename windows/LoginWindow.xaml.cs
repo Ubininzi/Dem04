@@ -1,4 +1,5 @@
 ﻿using dem04.EFModel;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Windows;
 
@@ -11,26 +12,22 @@ namespace dem04
         public LoginWindow()
         {
             InitializeComponent();
-
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!CheckAuthtorization(LoginTextBox.Text, PasswordTextBox.Text))
+            Worker? worker = CheckAuthtorization(LoginTextBox.Text, PasswordTextBox.Text);
+            if (worker == null)
             {
-                MessageBox.Show("Указанный логин или пароль не найден!","Авторизация не удалась");
+                MessageBox.Show("Указанный логин или пароль не найден!", "Авторизация не удалась");
                 return;
             }
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(worker);
             mainWindow.Show();
             this.Close();
         }
-        private bool CheckAuthtorization(string Login, string Password) {
-            if (db.Logins.Any(log => log.Login1 == Login && log.Password == Password))
-            {
-                return true;
-            }
-            return false;
+        private Worker? CheckAuthtorization(string Login, string Password) {
+                return db.Logins.Include(l => l.Workers).FirstOrDefault(w => w.Login1 == Login && w.Password == Password).Workers.First();
         }
     }
 }

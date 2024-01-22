@@ -5,7 +5,9 @@ INSERT Roles
 VALUES('WORKER'),('ADMIN')
 DELETE FROM LOGINS
 INSERT LOGINS
-VALUES('ffde','1554'),	('ffeeff','15599551')
+VALUES
+('ffde','1554'),
+('ffeeff','15599551')
 
 DELETE FROM Clients
 INSERT Clients

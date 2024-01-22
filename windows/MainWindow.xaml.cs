@@ -1,12 +1,15 @@
-﻿using System.Windows;
+﻿using dem04.EFModel;
+using System.Windows;
 
 namespace dem04
 {
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public Worker worker;
+        public MainWindow(Worker worker)
         {
             InitializeComponent();
+            this.worker = worker;
         }
     }
 }
