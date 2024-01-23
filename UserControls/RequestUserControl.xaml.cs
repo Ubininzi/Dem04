@@ -1,4 +1,5 @@
 ﻿using dem04.EFModel;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace dem04.UserControls
@@ -15,7 +16,7 @@ namespace dem04.UserControls
             WorkerLabel.Content = thisRequest.Worker;
             DateOfAcceptLabel.Content = thisRequest.DateOfAccept;
             DateOfWorkStartLabel.Content = thisRequest.DateOfWorkStart;
-            EquipmentLabel.Content = thisRequest.Equipment;
+            EquipmentLabel.Content = string.Join(',',thisRequest.Equipment);
             DescriptionLabel.Content = thisRequest.RequestDescription;
 
         }

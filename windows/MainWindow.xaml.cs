@@ -8,41 +8,36 @@ namespace dem04
 {
 	public partial class MainWindow : Window
 	{
-		public MainWindow()
-		{
-			InitializeComponent();
-			MainGrid = FillMainGrid();
-		}
-		public Grid FillMainGrid() { 
-			Grid grid = new Grid();
-			Dem04DbContext db = new Dem04DbContext();
-			int i = 0, j = 0;
-			foreach (Request request in db.Requests.Include(r => r.Worker).Include(r => r.Client).Include(r => r.Equipment))
-			{
-				RequestUserControl newRequest = new RequestUserControl(request);
-
-				Grid.SetColumn(newRequest, i);
-				Grid.SetRow(newRequest, j);
-				grid.Children.Add(newRequest);
-
-				i++;
-				if (i >= 5)
-				{
-					RowDefinition row = new RowDefinition();
-					grid.RowDefinitions.Add(row);
-					i = 0; j++;
-				}
-			}
-			return grid;
-		}
-	}
-    public partial class MainWindow : Window
-    {
         public Worker worker;
         public MainWindow(Worker worker)
         {
             InitializeComponent();
+			FillMainGrid();
             this.worker = worker;
         }
-    }
+        public void FillMainGrid() { 
+			MainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+			MainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+			MainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+			MainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            MainGrid.RowDefinitions.Add(new RowDefinition());
+            MainGrid.RowDefinitions.Add(new RowDefinition());
+            Dem04DbContext db = new Dem04DbContext();
+			int i = 0, j = 0;
+			foreach (Request request in db.Requests.Include(r => r.WorkerNavigation).Include(r => r.ClientNavigation))
+			{
+				RequestUserControl newRequest = new RequestUserControl(request);
+				Grid.SetColumn(newRequest, i);
+				Grid.SetRow(newRequest, j);
+				MainGrid.Children.Add(newRequest);
+
+				i++; j = i / 4;
+				if (i >= 5)
+				{
+					MainGrid.RowDefinitions.Add(new RowDefinition());
+					i = 0;
+				}
+			}
+		}
+	}
 }
