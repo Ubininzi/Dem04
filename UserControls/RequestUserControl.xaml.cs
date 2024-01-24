@@ -1,7 +1,9 @@
 ﻿using dem04.EFModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace dem04.UserControls
 {
@@ -11,6 +13,10 @@ namespace dem04.UserControls
 		private MainWindow EvokingWindow;
 		private bool isEditing = false;
 		private Dem04DbContext db = new Dem04DbContext(); 
+		private List<SolidColorBrush> gamma = new List<SolidColorBrush>() { 
+			new SolidColorBrush(Colors.LightGreen),
+			new SolidColorBrush(Colors.LightSeaGreen)
+		};
 		public RequestUserControl(Request request, MainWindow EvokingWindow)
 		{
 			InitializeComponent();
@@ -19,6 +25,7 @@ namespace dem04.UserControls
 			FillUserControl(thisRequest);
 		}
 		private void FillUserControl(Request request) {
+			MainBorder.Background = gamma[thisRequest.RequestPriority];
 			RequestStateTextBox.Text = thisRequest.RequestState.ToString();
 			ClientTextBox.Text = db.Clients.First(c => c.Id == thisRequest.Client).Surname;
 			WorkerTextBox.Text = db.Workers.First(w => w.Id == thisRequest.Worker).Surname;

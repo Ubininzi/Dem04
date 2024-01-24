@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="pict\no.png" />
+    <None Remove="pict\pen.png" />
+    <None Remove="pict\trashcan.png" />
+    <None Remove="pict\yes.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.15">
       <PrivateAssets>all</PrivateAssets>
@@ -23,6 +30,13 @@
   <ItemGroup>
     <Folder Include="EFModel\" />
     <Folder Include="UserControls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="pict\no.png" />
+    <Resource Include="pict\pen.png" />
+    <Resource Include="pict\trashcan.png" />
+    <Resource Include="pict\yes.png" />
   </ItemGroup>
 
 </Project>
