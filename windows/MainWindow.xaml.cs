@@ -1,6 +1,7 @@
 ﻿using dem04.EFModel;
 using dem04.UserControls;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -8,34 +9,53 @@ namespace dem04
 {
 	public partial class MainWindow : Window
 	{
-		public Worker worker;
+		public Worker thisWorker;
+		public Dem04DbContext db = new Dem04DbContext();
 		public MainWindow(Worker worker)
 		{
 			InitializeComponent();
-			MainGrid = FillMainGrid();
-			this.worker = worker;
+			this.thisWorker = worker;
+			LoginLabel.Content = $"Вы вошли как: {db.Roles.First(r => r.Id == thisWorker.LoginNavigation.Role).Rolename} {thisWorker.Name} {thisWorker.Surname}";
+			FillMainGrid();
 		}
-		public Grid FillMainGrid() { 
-			Grid grid = new Grid();
-			Dem04DbContext db = new Dem04DbContext();
+		public void FillMainGrid() { 
 			int i = 0, j = 0;
-			foreach (Request request in db.Requests.Include(r => r.Worker).Include(r => r.Client).Include(r => r.Equipment))
+			foreach (Request request in db.Requests.Include(r => r.ClientNavigation))
 			{
-				RequestUserControl newRequest = new RequestUserControl(request);
-
-				Grid.SetColumn(newRequest, i);
-				Grid.SetRow(newRequest, j);
-				grid.Children.Add(newRequest);
-
-				i++;
-				if (i >= 5)
+				if (request.WorkerNavigation == thisWorker || thisWorker.LoginNavigation.RoleNavigation.IsAdmin)
 				{
-					RowDefinition row = new RowDefinition();
-					grid.RowDefinitions.Add(row);
-					i = 0; j++;
+					RequestUserControl newRequest = new RequestUserControl(request, this);
+					Grid.SetColumn(newRequest, i);
+					Grid.SetRow(newRequest, j);
+					MainGrid.Children.Add(newRequest);
+					i++;
+					if (i >= 4)
+					{
+						MainGrid.RowDefinitions.Add(new RowDefinition());
+						i = 0; j++;
+					}
 				}
 			}
-			return grid;
+		}
+		public void RefreshData() {
+			MainGrid.Children.Clear();
+			FillMainGrid();
+		}
+		private void RefreshButton_Click(object sender, RoutedEventArgs e)
+		{
+			RefreshData();
+		}
+
+		private void CreateRequestButton_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void LogOutButton_Click(object sender, RoutedEventArgs e)
+		{
+			LoginWindow loginWindow = new LoginWindow();
+			loginWindow.Show();
+			this.Close();
 		}
 	}
 }

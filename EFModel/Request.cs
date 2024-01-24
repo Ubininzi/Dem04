@@ -15,15 +15,15 @@ public partial class Request
 
     public string RequestState { get; set; } = null!;
 
-    public int? Client { get; set; }
+    public int Client { get; set; }
 
-    public int? Worker { get; set; }
+    public int Worker { get; set; }
 
     public int RequestPriority { get; set; }
 
-    public virtual Client? ClientNavigation { get; set; }
+    public virtual Client ClientNavigation { get; set; } = null!;
 
-    public virtual Worker? WorkerNavigation { get; set; }
+    public virtual Worker WorkerNavigation { get; set; } = null!;
 
     public virtual ICollection<Equipment> Equipment { get; set; } = new List<Equipment>();
 }

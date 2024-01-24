@@ -13,13 +13,9 @@ public partial class Worker
 
     public string Number { get; set; } = null!;
 
-    public int? Role { get; set; }
+    public string Login { get; set; } = null!;
 
-    public string? Login { get; set; }
-
-    public virtual Login? LoginNavigation { get; set; }
+    public virtual Login LoginNavigation { get; set; } = null!;
 
     public virtual ICollection<Request> Requests { get; set; } = new List<Request>();
-
-    public virtual Role? RoleNavigation { get; set; }
 }

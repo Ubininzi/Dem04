@@ -1,30 +1,37 @@
 USE Dem04DB
 
-DELETE FROM Roles
-INSERT Roles
-VALUES('WORKER'),('ADMIN')
+DELETE FROM EquipmentForRequest
+DELETE FROM Equipment
+DELETE FROM Requests
+DBCC CHECKIDENT('Requests',RESEED,0)
+DELETE FROM Workers
+DBCC CHECKIDENT('Workers',RESEED,0)
 DELETE FROM LOGINS
+DELETE FROM Clients
+DBCC CHECKIDENT('Clients',RESEED,0)
+DELETE FROM Roles
+DBCC CHECKIDENT('Roles',RESEED,0)
+
+INSERT Roles
+VALUES('WORKER',0),('ADMIN',1)
+
 INSERT LOGINS
 VALUES
-('ffde','1554'),
-('ffeeff','15599551')
+('ffde','1554',1),
+('ffeeff','15599551',2)
 
-DELETE FROM Clients
 INSERT Clients
-VALUES('Иванов','Иван','9878476295')
+VALUES('Иван','Иванов','9878476295')
 
-DELETE FROM Workers
 INSERT Workers VALUES
-('Иванов','Иван','9878476295',1,'ffde'),
-('Петров','Петр','5486781548',2,'ffeeff')
+('Иван','Иванов','9878476295','ffde'),
+('Петр','Петров','5486781548','ffeeff')
 
+INSERT Requests VALUES
+('01.01.2012','02.01.2012','ffffff','В работе',1,2,0),
+('01.01.2012', NULL,'аааа','Принято',1,1,0),
+('01.01.2012','02.01.2012','ДДДДДДДДДдвв','В работе',1,2,0)
 
-DELETE FROM Requests
-DELETE FROM Equipment
-DELETE FROM EquipmentForRequest
-
-
-
-
-
-
+select * from Requests
+--INSERT Equipment Values
+--INSERT EquipmentForRequest
