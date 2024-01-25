@@ -43,10 +43,9 @@
 			</Button>
 
 
-            <TextBox x:Name="RequestStateTextBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Template="{StaticResource TextBoxTemplate}" IsEnabled="False" BorderThickness="0 0 0 0.5"/>
+            <TextBox x:Name="RequestStateTextBox" Grid.Row="0" Grid.Column="0" Template="{StaticResource TextBoxTemplate}" IsEnabled="False" BorderThickness="0 0 0 0.5"/>
 
-
-			<ComboBox x:Name="RequestStateComboBox"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="False" Background="Transparent" Visibility="Hidden"/>
+			<ComboBox x:Name="RequestStateComboBox"  Grid.Row="0" Grid.Column="0" IsEnabled="False" Background="Transparent" Visibility="Hidden"/>
 			<Grid Grid.Row="1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition/>

@@ -24,7 +24,7 @@ namespace dem04
 			{
 				if (request.WorkerNavigation == thisWorker || thisWorker.LoginNavigation.RoleNavigation.IsAdmin)//показ заявок за которые ответсвенен этот работник
 				{
-					RequestUserControl newRequest = new RequestUserControl(request, this);
+					RequestUserControl newRequest = new RequestUserControl(request, this,db);
 					Grid.SetColumn(newRequest, i);
 					Grid.SetRow(newRequest, j);
 					MainGrid.Children.Add(newRequest);

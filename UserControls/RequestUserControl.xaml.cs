@@ -16,14 +16,14 @@ namespace dem04.UserControls
 			new SolidColorBrush(Colors.LightGreen),
 			new SolidColorBrush(Colors.LightSeaGreen)
 		};
-		public RequestUserControl(Request request, MainWindow EvokingWindow)
+		public RequestUserControl(Request request, MainWindow EvokingWindow,Dem04DbContext dbContext)
 		{
 			InitializeComponent();
 			thisRequest = request;
 			this.EvokingWindow = EvokingWindow;
-			FillUserControl(thisRequest);
+			FillUserControl(thisRequest, dbContext);
 		}
-		private void FillUserControl(Request request) {
+		private void FillUserControl(Request request, Dem04DbContext dbContext) {
 			MainBorder.Background = gamma[thisRequest.RequestPriority];
 			RequestStateTextBox.Text = thisRequest.RequestStateNavigation.RequestState1.ToString();
 			ClientTextBox.Text = thisRequest.ClientNavigation.Surname;
@@ -35,6 +35,7 @@ namespace dem04.UserControls
 				DateOfWorkEndTextBox.Text = thisRequest.DateOfWorkEnd.Value.ToShortDateString();
 			EquipmentTextBox.Text = string.Join(',', thisRequest.Equipment);
 			DescriptionTextBox.Text = new string(thisRequest.RequestDescription);
+			RequestStateComboBox.Items.Add(dbContext.RequestStates.Select(R => R.RequestState1).ToList());
 		}
 		private void ChangeEditingMode() {
 			ApproveChanges.Visibility = isEditing ? Visibility.Visible : Visibility.Hidden;		//change button visibility
@@ -43,13 +44,20 @@ namespace dem04.UserControls
 			DeleteRequestButton.Visibility = isEditing ? Visibility.Hidden : Visibility.Visible;
 
 			RequestStateTextBox.IsEnabled = isEditing;		//добавить проверку если админ - меняет все поля, если работник - только статус и описание
+
 			WorkerTextBox.IsEnabled = isEditing;			//change texbox editing mode
 			DescriptionTextBox.IsEnabled = isEditing;
 
-		}
-		private void EditRequestButton_Click(object sender, RoutedEventArgs e)
+			RequestStateComboBox.Visibility = isEditing ? Visibility.Visible : Visibility.Hidden;
+            RequestStateTextBox.Visibility = isEditing ? Visibility.Hidden : Visibility.Visible;
+
+
+
+
+        }
+        private void EditRequestButton_Click(object sender, RoutedEventArgs e)
 		{
-			isEditing = true;;
+			isEditing = true;
             ChangeEditingMode();
 		}
 
@@ -68,9 +76,11 @@ namespace dem04.UserControls
 
 		private void DiscardChanges_Click(object sender, RoutedEventArgs e)
 		{
-            DescriptionTextBox.Text = thisRequest.RequestDescription + "";
 			isEditing = false;
 			ChangeEditingMode();
-		}
-	}
+            DescriptionTextBox.Clear();
+            DescriptionTextBox.Text = new string(thisRequest.RequestDescription);
+        }
+
+    }
 }
