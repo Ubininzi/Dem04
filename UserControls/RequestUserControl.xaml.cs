@@ -25,8 +25,8 @@ namespace dem04.UserControls
 			FillUserControl(thisRequest);
 		}
 		private void FillUserControl(Request request) {
-			MainBorder.Background = gamma[thisRequest.RequestPriority];
-			RequestStateTextBox.Text = thisRequest.RequestState.ToString();
+            MainBorder.Background = gamma[thisRequest.RequestPriority];
+			//RequestStateTextBox.Text = thisRequest.RequestState.ToString();
 			ClientTextBox.Text = db.Clients.First(c => c.Id == thisRequest.Client).Surname;
 			WorkerTextBox.Text = db.Workers.First(w => w.Id == thisRequest.Worker).Surname;
 			DateOfAcceptTextBox.Text = thisRequest.DateOfAccept.ToShortDateString();
@@ -35,16 +35,21 @@ namespace dem04.UserControls
 			EquipmentTextBox.Text = string.Join(',', thisRequest.Equipment);
 			DescriptionTextBox.Text = thisRequest.RequestDescription;
 		}
-		private void ChangeButtonsVisibility() {
-			ApproveChanges.Visibility = isEditing ? Visibility.Visible : Visibility.Hidden;
+		private void ChangeEditingMode() {
+			ApproveChanges.Visibility = isEditing ? Visibility.Visible : Visibility.Hidden;		//change button visibility
 			DiscardChanges.Visibility = isEditing ? Visibility.Visible : Visibility.Hidden;
 			EditRequestButton.Visibility = isEditing ? Visibility.Hidden : Visibility.Visible;
 			DeleteRequestButton.Visibility = isEditing ? Visibility.Hidden : Visibility.Visible;
+
+			//RequestStateTextBox.IsEnabled = isEditing;		//добавить проверку - если админ меняет все поля, если работник - только статус и описание
+            WorkerTextBox.IsEnabled = isEditing;			//change texbox editing mode
+            DescriptionTextBox.IsEnabled = isEditing;
+
 		}
 		private void EditRequestButton_Click(object sender, RoutedEventArgs e)
 		{
 			isEditing = true;
-			ChangeButtonsVisibility();
+			ChangeEditingMode();
 		}
 
 		private void DeleteRequestButton_Click(object sender, RoutedEventArgs e)
@@ -58,14 +63,14 @@ namespace dem04.UserControls
 		private void ApproveChanges_Click(object sender, RoutedEventArgs e)
 		{
             isEditing = false;
-			ChangeButtonsVisibility();
+			ChangeEditingMode();
 		}
 
 		private void DiscardChanges_Click(object sender, RoutedEventArgs e)
 		{
 			FillUserControl(thisRequest);
 			isEditing = false;
-			ChangeButtonsVisibility();
+			ChangeEditingMode();
 		}
 	}
 }

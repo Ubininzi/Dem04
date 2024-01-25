@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 #obsidian notes folder
 /.obsidian
+/appconfig.json

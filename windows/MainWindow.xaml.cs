@@ -20,9 +20,10 @@ namespace dem04
 		}
 		public void FillMainGrid() { 
 			int i = 0, j = 0;
+
 			foreach (Request request in db.Requests.Include(r => r.ClientNavigation))
 			{
-				if (request.WorkerNavigation == thisWorker || thisWorker.LoginNavigation.RoleNavigation.IsAdmin)
+				if (request.WorkerNavigation == thisWorker || thisWorker.LoginNavigation.RoleNavigation.IsAdmin)//показ заявок за которые ответсвенен этот работник
 				{
 					RequestUserControl newRequest = new RequestUserControl(request, this);
 					Grid.SetColumn(newRequest, i);

@@ -10,17 +10,17 @@
     <UserControl.Resources>
         <ControlTemplate TargetType="TextBox" x:Key="TextBoxTemplate">
             <Border BorderThickness="0 0 0 0.5" BorderBrush="Black" Margin="0.2">
-                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0.5" IsEnabled="False" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold" Text="{TemplateBinding Text}"/>
+                <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0.5" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold" Text="{TemplateBinding Text}" IsEnabled="{TemplateBinding IsEnabled}"/>
             </Border>
         </ControlTemplate>
-        
+
         <ControlTemplate TargetType="Button" x:Key="ButtonTemplate">
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="{TemplateBinding Margin}" Width="20" Height="20" Content="{TemplateBinding Content}"/>
-        </ControlTemplate>
-    </UserControl.Resources>
+			<Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="{TemplateBinding Margin}" Width="20" Height="20" Content="{TemplateBinding Content}"/>
+		</ControlTemplate>
+	</UserControl.Resources>
 
 
-    <Border x:Name="MainBorder" BorderBrush="Black" BorderThickness="1" CornerRadius="10 0 10 0" Background="White">
+	<Border x:Name="MainBorder" BorderBrush="Black" BorderThickness="1" CornerRadius="10 0 10 0" Background="White">
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="5*" x:Name="infoRow"/>
@@ -33,26 +33,27 @@
 				<ColumnDefinition Width="1*"/>
 				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
-            <Button x:Name="EditRequestButton" Grid.Row="0" Grid.Column="1" Template="{StaticResource ButtonTemplate}" Click="EditRequestButton_Click" Margin="1 1 1 1">
-                <Image Source="pack://application:,,,/pict/pen.png"/>
-            </Button>
-            <Button x:Name="ApproveChanges" Grid.Row="0" Grid.Column="1" Template="{StaticResource ButtonTemplate}" Click="ApproveChanges_Click" Visibility="Hidden" Margin="1 1 1 1">
-                <Image Source="pack://application:,,,/pict/yes.png"/>
-            </Button>
-            <Button x:Name="DeleteRequestButton" Grid.Row="0" Grid.Column="1" Template="{StaticResource ButtonTemplate}" Click="DeleteRequestButton_Click" Margin="1 1 12 1">
-                <Image Source="pack://application:,,,/pict/trashcan.png"/>
-            </Button>
-            <Button x:Name="DiscardChanges" Grid.Row="0" Grid.Column="1" Template="{StaticResource ButtonTemplate}" Click="DiscardChanges_Click" Visibility="Hidden" Margin="1 1 12 1">
-                <Image Source="pack://application:,,,/pict/no.png"/>
-            </Button>
+			<Button x:Name="EditRequestButton" Grid.Row="0" Grid.Column="1" Template="{StaticResource ButtonTemplate}" Click="EditRequestButton_Click" Margin="1 1 1 1">
+				<Image Source="pack://application:,,,/pict/pen.png"/>
+			</Button>
+			<Button x:Name="ApproveChanges" Grid.Row="0" Grid.Column="1" Template="{StaticResource ButtonTemplate}" Click="ApproveChanges_Click" Visibility="Hidden" Margin="1 1 1 1">
+				<Image Source="pack://application:,,,/pict/yes.png"/>
+			</Button>
+			<Button x:Name="DeleteRequestButton" Grid.Row="0" Grid.Column="1" Template="{StaticResource ButtonTemplate}" Click="DeleteRequestButton_Click" Margin="1 1 12 1">
+				<Image Source="pack://application:,,,/pict/trashcan.png"/>
+			</Button>
+			<Button x:Name="DiscardChanges" Grid.Row="0" Grid.Column="1" Template="{StaticResource ButtonTemplate}" Click="DiscardChanges_Click" Visibility="Hidden" Margin="1 1 12 1">
+				<Image Source="pack://application:,,,/pict/no.png"/>
+			</Button>
 
-            <TextBox x:Name="RequestStateTextBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Template="{StaticResource TextBoxTemplate}"/>
-            <TextBox x:Name="ClientTextBox" Grid.Row="1" Grid.Column="0" Template="{StaticResource TextBoxTemplate}" />
-            <TextBox x:Name="WorkerTextBox" Grid.Row="1" Grid.Column="1" Template="{StaticResource TextBoxTemplate}" />
-            <TextBox x:Name="DateOfAcceptTextBox" Grid.Row="2" Grid.Column="0" Template="{StaticResource TextBoxTemplate}" />
-            <TextBox x:Name="DateOfWorkStartTextBox" Grid.Row="2" Grid.Column="1" Template="{StaticResource TextBoxTemplate}" />
-            <TextBox x:Name="EquipmentTextBox" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Template="{StaticResource TextBoxTemplate}" />
-            <TextBox x:Name="DescriptionTextBox" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0.5" IsEnabled="False" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold" TextWrapping="Wrap" />
+			<!--<TextBox x:Name="RequestStateTextBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Template="{StaticResource TextBoxTemplate}" IsEnabled="False"/>-->
+            <ComboBox x:Name="RequestStateComboBox"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="False" Background="Transparent" />
+            <TextBox x:Name="ClientTextBox" Grid.Row="1" Grid.Column="0" Template="{StaticResource TextBoxTemplate}" IsEnabled="False"/>
+            <TextBox x:Name="WorkerTextBox" Grid.Row="1" Grid.Column="1" Template="{StaticResource TextBoxTemplate}" IsEnabled="False"/>
+            <TextBox x:Name="DateOfAcceptTextBox" Grid.Row="2" Grid.Column="0" Template="{StaticResource TextBoxTemplate}" IsEnabled="False"/>
+            <TextBox x:Name="DateOfWorkStartTextBox" Grid.Row="2" Grid.Column="1" Template="{StaticResource TextBoxTemplate}" IsEnabled="False"/>
+            <TextBox x:Name="EquipmentTextBox" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Template="{StaticResource TextBoxTemplate}" IsEnabled="False"/>
+            <TextBox x:Name="DescriptionTextBox" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0.5" IsEnabled="False" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold" TextWrapping="Wrap" />
 		</Grid>
 	</Border>
 </UserControl>
