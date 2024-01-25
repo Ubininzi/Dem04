@@ -11,9 +11,11 @@ public partial class Request
 
     public DateTime? DateOfWorkStart { get; set; }
 
+    public DateTime? DateOfWorkEnd { get; set; }
+
     public string? RequestDescription { get; set; }
 
-    public string RequestState { get; set; } = null!;
+    public int RequestState { get; set; }
 
     public int Client { get; set; }
 
@@ -22,6 +24,8 @@ public partial class Request
     public int RequestPriority { get; set; }
 
     public virtual Client ClientNavigation { get; set; } = null!;
+
+    public virtual RequestState RequestStateNavigation { get; set; } = null!;
 
     public virtual Worker WorkerNavigation { get; set; } = null!;
 

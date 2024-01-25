@@ -12,7 +12,6 @@ namespace dem04.UserControls
 		public Request thisRequest;
 		private MainWindow EvokingWindow;
 		private bool isEditing = false;
-		private Dem04DbContext db = new Dem04DbContext(); 
 		private List<SolidColorBrush> gamma = new List<SolidColorBrush>() { 
 			new SolidColorBrush(Colors.LightGreen),
 			new SolidColorBrush(Colors.LightSeaGreen)
@@ -25,15 +24,17 @@ namespace dem04.UserControls
 			FillUserControl(thisRequest);
 		}
 		private void FillUserControl(Request request) {
-            MainBorder.Background = gamma[thisRequest.RequestPriority];
-			//RequestStateTextBox.Text = thisRequest.RequestState.ToString();
-			ClientTextBox.Text = db.Clients.First(c => c.Id == thisRequest.Client).Surname;
-			WorkerTextBox.Text = db.Workers.First(w => w.Id == thisRequest.Worker).Surname;
-			DateOfAcceptTextBox.Text = thisRequest.DateOfAccept.ToShortDateString();
+			MainBorder.Background = gamma[thisRequest.RequestPriority];
+			RequestStateTextBox.Text = thisRequest.RequestStateNavigation.RequestState1.ToString();
+			ClientTextBox.Text = thisRequest.ClientNavigation.Surname;
+			WorkerTextBox.Text = thisRequest.WorkerNavigation.Surname;
+            DateOfAcceptTextBox.Text = thisRequest.DateOfAccept.ToShortDateString();
 			if (thisRequest.DateOfWorkStart != null)
 				DateOfWorkStartTextBox.Text = thisRequest.DateOfWorkStart.Value.ToShortDateString();
+			if (thisRequest.DateOfWorkEnd != null)
+				DateOfWorkEndTextBox.Text = thisRequest.DateOfWorkEnd.Value.ToShortDateString();
 			EquipmentTextBox.Text = string.Join(',', thisRequest.Equipment);
-			DescriptionTextBox.Text = thisRequest.RequestDescription;
+			DescriptionTextBox.Text = new string(thisRequest.RequestDescription);
 		}
 		private void ChangeEditingMode() {
 			ApproveChanges.Visibility = isEditing ? Visibility.Visible : Visibility.Hidden;		//change button visibility
@@ -41,34 +42,33 @@ namespace dem04.UserControls
 			EditRequestButton.Visibility = isEditing ? Visibility.Hidden : Visibility.Visible;
 			DeleteRequestButton.Visibility = isEditing ? Visibility.Hidden : Visibility.Visible;
 
-			//RequestStateTextBox.IsEnabled = isEditing;		//добавить проверку - если админ меняет все поля, если работник - только статус и описание
-            WorkerTextBox.IsEnabled = isEditing;			//change texbox editing mode
-            DescriptionTextBox.IsEnabled = isEditing;
+			RequestStateTextBox.IsEnabled = isEditing;		//добавить проверку если админ - меняет все поля, если работник - только статус и описание
+			WorkerTextBox.IsEnabled = isEditing;			//change texbox editing mode
+			DescriptionTextBox.IsEnabled = isEditing;
 
 		}
 		private void EditRequestButton_Click(object sender, RoutedEventArgs e)
 		{
-			isEditing = true;
-			ChangeEditingMode();
+			isEditing = true;;
+            ChangeEditingMode();
 		}
 
 		private void DeleteRequestButton_Click(object sender, RoutedEventArgs e)
 		{
-            EvokingWindow.MainGrid.Children.Remove(this);
-            EvokingWindow.db.Requests.Remove(thisRequest);
-            EvokingWindow.db.SaveChanges();
-            EvokingWindow.RefreshData();
-        }
+			EvokingWindow.RemoveRequest(this);
+		}
 
 		private void ApproveChanges_Click(object sender, RoutedEventArgs e)
 		{
-            isEditing = false;
+			thisRequest.RequestDescription = DescriptionTextBox.Text;
+			EvokingWindow.EditRequest(this);
+			isEditing = false;
 			ChangeEditingMode();
 		}
 
 		private void DiscardChanges_Click(object sender, RoutedEventArgs e)
 		{
-			FillUserControl(thisRequest);
+            DescriptionTextBox.Text = thisRequest.RequestDescription + "";
 			isEditing = false;
 			ChangeEditingMode();
 		}

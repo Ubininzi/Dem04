@@ -9,8 +9,8 @@ namespace dem04
 {
 	public partial class MainWindow : Window
 	{
-		public Worker thisWorker;
-		public Dem04DbContext db = new Dem04DbContext();
+		private Worker thisWorker;
+		private Dem04DbContext db = new Dem04DbContext();
 		public MainWindow(Worker worker)
 		{
 			InitializeComponent();
@@ -20,8 +20,7 @@ namespace dem04
 		}
 		public void FillMainGrid() { 
 			int i = 0, j = 0;
-
-			foreach (Request request in db.Requests.Include(r => r.ClientNavigation))
+			foreach (Request request in db.Requests.Include(r => r.ClientNavigation).Include(r => r.RequestStateNavigation).Include(r => r.WorkerNavigation))
 			{
 				if (request.WorkerNavigation == thisWorker || thisWorker.LoginNavigation.RoleNavigation.IsAdmin)//показ заявок за которые ответсвенен этот работник
 				{
@@ -32,11 +31,22 @@ namespace dem04
 					i++;
 					if (i >= 4)
 					{
-						MainGrid.RowDefinitions.Add(new RowDefinition());
+						RowDefinition row1 = new();
+						row1.Height = new GridLength(450, GridUnitType.Pixel);
+						MainGrid.RowDefinitions.Add(row1);
 						i = 0; j++;
 					}
 				}
 			}
+		}
+		public void RemoveRequest(RequestUserControl requestUC) {
+			MainGrid.Children.Remove(requestUC);
+			db.Requests.Remove(requestUC.thisRequest);
+			db.SaveChanges();
+			RefreshData();
+		}
+		public void EditRequest(RequestUserControl requestUC) {
+			db.SaveChanges();
 		}
 		public void RefreshData() {
 			MainGrid.Children.Clear();
